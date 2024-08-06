@@ -1,0 +1,58 @@
+<style>
+  #a{
+    margin-left:45%;
+  }
+  .activities,.activities__header,.activities__box,.h2{
+    background:linear-gradient(#000e2e,#004f5a);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+</style>
+{% load static %}
+<div class="activities">
+  <div class="activities__header" >
+    <h2 class='h2'>Recent Actions</h2>
+  </div>
+  {% for mes in room_mess %}
+  <div class="activities__box">
+    <div class="activities__boxHeader roomListRoom__header">
+      <a href="{% url "user-profile" mes.user.id %}" class="roomListRoom__author">
+        <div class="avatar avatar--small">
+          <img src="{{mes.user.image.url}}" >
+        </div>
+        <p>
+          @{{mes.user.username}}
+          <span>{{mes.created|timesince}} ago</span>
+        </p>
+      </a>
+      <div class="roomListRoom__actions">
+        {% if request.user == mes.user %}
+        <a href="{% url "delete-message" mes.id %}">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>remove</title>
+            <path
+              d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
+            ></path>
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="activities__boxContent">
+      <p>replied to post “<a href="{% url "room-room" mes.room.id %}">{{mes.room}}</a>”</p>
+      <div class="activities__boxRoomContent">
+        {{mes.body}}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+<a class="btn btn--link" id='a' href="{% url "activities" %}">
+  More
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <title>Open Activities Page</title>
+    <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+  </svg>
+</a>
+</div>
+
+

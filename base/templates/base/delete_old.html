@@ -1,0 +1,61 @@
+{% extends "main.html" %}
+
+{% block content %}
+<style>
+    .confirmation-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+    }
+    .confirmation-box {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: auto;
+        text-align: center;
+    }
+    .confirmation-box p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .confirmation-box a,
+
+    .confirmation-box a {
+        text-decoration: none;
+        color: black;
+    }
+    .confirmation-box a:hover {
+        
+        border-color: #545b62;
+    }
+    .confirmation-box input[type="submit"] {
+        color: #fff;
+        border: 1px solid #dc3545;
+        cursor: pointer;
+    }
+    .confirmation-box input[type="submit"]:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    .form-group{
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+<div class="confirmation-container">
+    <div class="confirmation-box">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete " <b>{{ OBJECT }}</b> "?</p>
+           <div class="form-group">
+            <a href="{{ request.META.HTTP_REFERER }}"><button type="button" class='btn btn-success'>Cancel</button></a>
+            <button type="submit" class='btn btn-warning'>Confrim</button>
+           </div>
+        </form>
+    </div>
+</div>
+{% endblock  %}

@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+
+{% block content %}
+{% if page == 'login' %}
+    <div>
+        <div>
+            {% for mess in messages %}
+                <p>{{mess}}</p>
+            {% endfor %}
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="">Username</label>
+            <input type="text" name="username" id="" placeholder='username'>
+            <label for="">Password</label>
+            <input type="password" name="password" id="" placeholder='password'>
+            <button type="submit">Login</button>
+        </form>
+        <p>Haven't signed up Yet?</p>
+        <a href="{% url "register" %}">Sign Up</a>
+    </div>
+{% else %}
+    <div>
+        <div>
+            {% for mess in messages %}
+                <p>{{mess}}</p>
+            {% endfor %}
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+           {{form.as_p}}
+            <button type="submit">Register</button>
+        </form>
+        <p>Already signed up Yet?</p>
+        <a href="{% url "login" %}">Login</a>
+    </div>
+    {% endif %}
+{% endblock  %}
