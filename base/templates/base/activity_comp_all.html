@@ -1,0 +1,15 @@
+<h3>Recent Activity</h3>
+<hr>
+{% for mes in room_mess %}
+<div>
+    <small><a href="{% url "user-profile" mes.user.id %}">@{{mes.user}}</a>&nbsp;&nbsp;&nbsp;{{mes.created|timesince}}</small>
+    
+    <p>replied to <b>"  {{mes.room}}  "</b></p>
+    <p><i>{{mes.body}}</i></p>
+    {% if request.user == mes.user %}
+        <a href="{% url "update-message" mes.id %}"><button class='btn btn-primary'>edit</button></a>
+        <a href="{% url "delete-message" mes.id %}"><button class='btn btn-danger'>delete</button></a>
+    {% endif %}
+    <hr>
+</div>
+{% endfor %}

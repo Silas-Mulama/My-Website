@@ -1,0 +1,59 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+
+  <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      {% include "base/topics_comp.html" %}
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              {% if user.image %}
+              <img src="{{user.image.url}}" >
+              {% else %}
+              <img src="{% static "images/avatar.svg" %}" alt="tyui">
+              {% endif %}
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{user.name}}</h3>
+            <p>@{{user.username}}</p>
+            
+            {% if user == request.user %}
+              <p>Active now</p>
+              <a href="{% url "update-profile" %}" class="btn btn--main btn--pill">Edit Profile</a>
+            {% else %}
+              <p>Active {{user.last_login|timesince}} ago</p>
+            {% endif %}
+            
+          </div>
+          <div class="profile__about">
+            <h3>About</h3>
+            <p>
+              {{user.bio}}
+            </p>
+          </div>
+        </div>
+
+        {% include "base/feed_comp.html" %}
+        <a class="btn btn--link" id='a' href="{% url "rooms" %}">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a>
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      {% include "base/activity_comp.html" %}
+      <!-- Activities End -->
+    </div>
+  </main>
+{% endblock %}
