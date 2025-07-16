@@ -9,7 +9,8 @@ SECRET_KEY = 'django-insecure-nj5*&v+4i(6$d-a$8*9k8l^#j&otdgw=2$hiqk0^2go+3=qfpy
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.16', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['192.168.0.16', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
